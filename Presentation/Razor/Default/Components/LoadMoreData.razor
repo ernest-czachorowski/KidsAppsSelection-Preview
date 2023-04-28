@@ -1,0 +1,15 @@
+﻿@if (PageStatus == PageStatus.Loading)
+{
+    <Loading />
+}
+
+<MudButton OnClick="LoadMoreItems"
+           Disabled="PageStatus == PageStatus.NoMoreData || PageStatus == PageStatus.Error"
+           Class="pa-2 mt-5 object-bottom"
+           Color="Color.Primary"
+           FullWidth="true"
+           Variant="Variant.Filled">
+           Load more...
+</MudButton>
+
+<InfiniteScroller IsActive="@((PageStatus == PageStatus.DataLoaded || PageStatus == PageStatus.Init)? true : false)" OnScrollerInViewPort="LoadMoreItems" />

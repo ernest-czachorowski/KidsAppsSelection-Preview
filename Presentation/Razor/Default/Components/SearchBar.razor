@@ -1,0 +1,11 @@
+﻿@inherits TwoWayBinding_T<string>
+
+<MudTextField @bind-Value="BindingValue" @bind-Value:after="@(() => ChangeBindingValue(BindingValue))"
+              Class="pa-2"
+              Adornment="Adornment.Start"
+              AdornmentIcon="@Icons.Material.Filled.Search"
+              FullWidth="true"
+              Label="Search"
+              Variant="Variant.Outlined"
+              Immediate="true"
+              DebounceInterval="1000" />

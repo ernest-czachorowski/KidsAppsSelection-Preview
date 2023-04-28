@@ -1,0 +1,43 @@
+﻿@page "/"
+@inherits IndexBase
+
+<PageTitle>Dashboard</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+    return;
+}
+
+<MudStack Spacing="3">
+    <MudPaper Class="pa-2 mud-theme-tertiary mud-info-tertiary">
+        <MudText Align="Align.Center" Typo="Typo.h6">Welcome to my portfolio!</MudText>
+    </MudPaper>
+    <MudText Align="Align.Justify" Typo="Typo.body1">
+        My name is <b>Ernest Czachorowski</b> and I am a passionate software developer with a focus on creating engaging and interactive applications. My current project is a C# Blazor application that serves as a repository of educational apps and games for children.
+    </MudText>
+    <MudText Align="Align.Justify" Typo="Typo.body1">
+        Through this project, I aim to demonstrate my programming skills and showcase my ability to develop user-friendly and aesthetically pleasing applications. While the <b>application is still a work in progress</b>, I am excited to share my progress with you and invite you to take a look at what I have accomplished so far.
+    </MudText>
+    <MudText Align="Align.Justify" Typo="Typo.body1">
+        My approach to software development is centered around understanding the needs of users and creating solutions that meet their needs in a seamless and intuitive manner. Whether it's developing new features, troubleshooting issues, or optimizing performance, I am committed to delivering high-quality software that delivers value to users.
+    </MudText>
+    <MudText Align="Align.Justify" Typo="Typo.body1">
+        Thank you for visiting my portfolio, and I hope you enjoy exploring my projects. If you have any questions or would like to discuss potential collaboration opportunities, please don't hesitate to reach out to me.
+    </MudText>
+    <MudText Align="Align.Justify" Typo="Typo.body1">
+        <b>Login as an admin or user to explore more features.</b>
+    </MudText>
+    @for (int i = 1; i < 4; i++)
+    {
+        int localIndex = i;
+        string login = $"admin-{localIndex}@google.com";
+        <MudButton OnClick="() => LoginAsHandler(login)" FullWidth="true" Color="Color.Error" Variant="Variant.Filled">Login as @login</MudButton>
+    }
+    @for (int i = 1; i < 9; i++)
+    {
+        int localIndex = i;
+        string login = $"user-{localIndex}@google.com";
+        <MudButton OnClick="() => LoginAsHandler(login)" FullWidth="true" Color="Color.Warning" Variant="Variant.Filled">Login as @login</MudButton>
+    }
+</MudStack>

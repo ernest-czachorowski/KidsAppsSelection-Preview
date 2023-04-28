@@ -1,0 +1,30 @@
+﻿@page "/Admin/ManageApps"
+@inherits AppsBase
+@attribute [Authorize(Roles = nameof(UserRole.Admin))]
+
+<PageTitle>Manage Apps</PageTitle>
+
+<MudAlert Class="my-2" Severity="Severity.Warning" Variant="Variant.Filled">The application is not yet complete, and the presented data is only for testing purposes.</MudAlert>
+
+<MudExpansionPanels>
+    <MudExpansionPanel Text="Advanced">
+        <Selector_T TItem="AppPlatform" Label="Platform" BindingValueChanged="OnAppPlatformChangedHandler" BindingValue=@appPlatform />
+        <Selector_T TItem="AppStatus" Label="Status" BindingValueChanged="OnAppStatusChangedHandler" BindingValue=@appStatus />
+        <MudSlider Class="pa-2" Min="0" Max="30" TickMarks="true" Immediate="true" Step="5" Size="Size.Large" @bind-Value="@carouselSize">Gallery size: @carouselSize</MudSlider>
+    </MudExpansionPanel>
+</MudExpansionPanels>
+<SearchBar BindingValue="@searchedText" BindingValueChanged="SearchTextHandler" />
+
+@if (mainObject != null)
+{
+    <MudGrid Justify="Justify.SpaceBetween" Spacing="3">
+        @foreach (var app in mainObject)
+        {
+            <MudItem xs="12" md="6">
+                <Admin_AppPreviewContainer App="@app" GallerySize="@carouselSize" />
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+<LoadMoreData PageStatus="@pageStatus" LoadMoreItems="LoadMoreItems" />

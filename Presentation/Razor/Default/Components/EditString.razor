@@ -1,0 +1,8 @@
+﻿@inherits ValueComparer_T<string>
+
+<MudTextField @bind-Value="@CurrentValue" FullWidth="true" Immediate="true" Variant="Variant.Outlined" />
+
+@if (!CurrentValue.Equals(BackupValue))
+{
+    <WarningIfValueChanged RestoreValueHandler="@(() => RestoreValueHandler())" />
+}

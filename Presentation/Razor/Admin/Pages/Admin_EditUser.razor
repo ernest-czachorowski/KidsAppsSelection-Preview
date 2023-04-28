@@ -1,0 +1,65 @@
+﻿@page "/Admin/EditUser/{guid:guid}"
+@inherits Admin_EditUserBase
+@attribute [Authorize(Roles = nameof(UserRole.Admin))]
+
+<PageTitle>Edit User</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+}
+else if (pageStatus == PageStatus.DataLoaded)
+{
+    <EditForm Model="@mainObject" OnValidSubmit="SubmitFormHandler">
+        <MudExpansionPanels>
+            <MudExpansionPanel Text="Username">
+                <EditString CurrentValue="@mainObject.Username" OnValueSaved="(val) => mainObject.Username = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Email">
+                <EditString CurrentValue="@mainObject.Email" OnValueSaved="(val) => mainObject.Email = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Role">
+                <EditSelectorValue_T TItem="UserRole" CurrentValue="@mainObject.Role" OnValueSaved="(val) => mainObject.Role = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="User Apps">
+                <MudTable Items="@mainObject.Apps" Hover="true" Breakpoint="Breakpoint.Sm" HorizontalScrollbar="false">
+                    <HeaderContent>
+                        <MudTh>Icon</MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<App_DTO, object>(x=>x.Title)">Title</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<App_DTO, object>(x=>x.Status)">Visibility</MudTableSortLabel></MudTh>
+                        <MudTh><MudTableSortLabel SortBy="new Func<App_DTO, object>(x=>x.Platform)">Platform</MudTableSortLabel></MudTh>
+                        <MudTh>Edit</MudTh>
+                        <MudTh>Go to store</MudTh>
+                    </HeaderContent>
+                    <RowTemplate Context="App">
+                        <MudTd DataLabel="Icon">
+                            <MudImage Src="@App.Icon" Alt="@GLOBAL.IMAGE_ALT_TEXT" Class="ma-2" ObjectFit="ObjectFit.Fill" Width="@GLOBAL.IMAGE_SIZE_3" Height="@GLOBAL.IMAGE_SIZE_3"/>
+                        </MudTd>
+                        <MudTd DataLabel="Title">@App.Title</MudTd>
+                        <MudTd DataLabel="Visibility">@App.Status</MudTd>
+                        <MudTd DataLabel="Platform">@App.Platform</MudTd>
+                        <MudTd DataLabel="Edit app">
+                            <MudButton Href="@($"/Admin/EditApp/{App.Id}")" Color="Color.Secondary" Variant="Variant.Filled">Edit</MudButton>
+                        </MudTd>
+                        <MudTd DataLabel="Go to store">
+                            <MudButton Href="@App.Url" Color="Color.Primary" Variant="Variant.Filled">Go to store</MudButton>
+                        </MudTd>
+                    </RowTemplate>
+                    <PagerContent>
+                        <MudTablePager PageSizeOptions="new int[]{10, 100}" />
+                    </PagerContent>
+                </MudTable>
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Preview">
+                <MudElement Class="pa-4">
+                    <Admin_UserPreviewContainer SelectedUser="@mainObject" />
+                </MudElement>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+        <MudStack Class="my-4 pa-4 mud-theme-surface mud-surface-text" Row="true" Justify="Justify.SpaceBetween">
+            <MudButton OnClick="@(() => DeleteUserHandler(mainObject.Id))" ButtonType="ButtonType.Button" Color="Color.Error" Variant="Variant.Filled">Delete</MudButton>
+            <MudButton OnClick="@RestoreFromBackupHandler" ButtonType="ButtonType.Button" Color="Color.Secondary" Variant="Variant.Filled">Restore</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Submit</MudButton>
+        </MudStack>
+    </EditForm>
+}

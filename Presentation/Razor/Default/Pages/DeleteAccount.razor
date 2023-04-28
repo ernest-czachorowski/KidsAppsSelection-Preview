@@ -1,0 +1,27 @@
+﻿@page "/DeleteAccount"
+@inherits DeleteAccountBase
+
+<PageTitle>Delete Account</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+}
+
+<EditForm EditContext="@editContext" OnValidSubmit="DeleteHandler">
+    <DataAnnotationsValidator />
+    <MudCard Class="pa-2 mud-theme-surface mud-surface-text">
+        <MudCardHeader Class="pa-2 mud-theme-tertiary mud-tertiary-text">
+            <MudText Align="Align.Center" Typo="Typo.h6">Delete account</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText Align="Align.Justify" Typo="Typo.body1">Please provide your email address and password again to confirm the deletion of your account.</MudText>
+            <MudTextField @bind-Value="@mainObject.Email" For="@(() => mainObject.Email)" FullWidth="true" Label="Email" Variant="Variant.Text" Immediate="true"></MudTextField>
+            <Password BindingValue="@mainObject.Password" BindingValueChanged="@((val) => mainObject.Password = val)" For="@(() => mainObject.Password)" />
+        </MudCardContent>
+        <MudCardActions>
+            <MudSpacer />
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Error" Variant="Variant.Filled">Delete my account</MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>

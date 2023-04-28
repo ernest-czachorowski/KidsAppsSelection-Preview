@@ -1,0 +1,9 @@
+﻿@inherits ValueComparer_T<string>
+
+<MudImage Src="@CurrentValue" Width="@GLOBAL.IMAGE_SIZE_4" Height="@GLOBAL.IMAGE_SIZE_4" Alt="@GLOBAL.IMAGE_ALT_TEXT" ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.ScaleDown" />
+<MudTextField @bind-Value="@CurrentValue" FullWidth="true" Immediate="true" Variant="Variant.Outlined"></MudTextField>
+
+@if (!CurrentValue.Equals(BackupValue))
+{
+    <WarningIfValueChanged RestoreValueHandler="@(() => RestoreValueHandler())" />
+}

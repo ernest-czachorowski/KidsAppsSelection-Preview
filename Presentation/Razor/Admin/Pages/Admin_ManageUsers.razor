@@ -1,0 +1,28 @@
+﻿@page "/Admin/ManageUsers"
+@inherits Admin_ManageUsersBase
+@attribute [Authorize(Roles = nameof(UserRole.Admin))]
+
+<PageTitle>Manage Users</PageTitle>
+
+<MudAlert Class="my-2" Severity="Severity.Warning" Variant="Variant.Filled">The application is not yet complete, and the presented data is only for testing purposes.</MudAlert>
+
+<MudExpansionPanels>
+    <MudExpansionPanel Text="Advanced">
+        <Selector_T TItem="UserRole" Label="Role" BindingValueChanged="OnRoleChangedHandler" BindingValue="@userRole" />
+    </MudExpansionPanel>
+</MudExpansionPanels>
+<SearchBar BindingValue="@searchedText" BindingValueChanged="SearchTextHandler" />
+
+@if (mainObject != null)
+{
+    <MudGrid Justify="Justify.SpaceBetween" Spacing="3">
+        @foreach (var user in mainObject)
+        {
+            <MudItem xs="12" md="6">
+                <Admin_UserPreviewContainer SelectedUser="@user" />
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+<LoadMoreData PageStatus="@pageStatus" LoadMoreItems="LoadMoreItems" />

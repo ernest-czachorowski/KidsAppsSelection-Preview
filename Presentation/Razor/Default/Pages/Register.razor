@@ -1,0 +1,28 @@
+﻿@page "/Register"
+@inherits RegisterBase
+
+<PageTitle>Register</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+}
+
+<EditForm EditContext="@editContext" OnValidSubmit="RegisterHandler">
+    <DataAnnotationsValidator />
+    <MudCard Class="pa-2 mud-theme-surface mud-surface-text">
+        <MudCardHeader Class="pa-2 mud-theme-tertiary mud-tertiary-text">
+            <MudText Align="Align.Center" Typo="Typo.h6">Register</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudTextField @bind-Value="@mainObject.Username" For="@(() => mainObject.Username)" Label="Username" Variant="Variant.Text" Immediate="true"></MudTextField>
+            <MudTextField @bind-Value="@mainObject.Email" For="@(() => mainObject.Email)" Label="Email" Variant="Variant.Text" Immediate="true"></MudTextField>
+            <Password BindingValue="@mainObject.Password" BindingValueChanged="@((val) => mainObject.Password = val)" For="@(() => mainObject.Password)" />
+            <Password BindingValue="@mainObject.ConfirmPassword" BindingValueChanged="@((val) => mainObject.ConfirmPassword = val)" For="@(() => mainObject.ConfirmPassword)" Label="Confirm password" />
+        </MudCardContent>
+        <MudCardActions>
+            <MudSpacer />
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Register</MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>

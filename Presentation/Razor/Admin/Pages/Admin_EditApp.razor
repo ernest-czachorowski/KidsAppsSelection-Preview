@@ -1,0 +1,48 @@
+﻿@page "/Admin/EditApp/{guid:guid}"
+@inherits Admin_EditAppBase
+@attribute [Authorize(Roles = nameof(UserRole.Admin))]
+
+<PageTitle>Edit App</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+}
+else if (pageStatus == PageStatus.DataLoaded)
+{
+    <EditForm Model="@mainObject" OnValidSubmit="SubmitFormHandler">
+        <MudExpansionPanels>
+            <MudExpansionPanel Text="Title">
+                <EditString CurrentValue="@mainObject.Title" OnValueSaved="(val) => mainObject.Title = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="App URL">
+                <EditString CurrentValue="@mainObject.Url" OnValueSaved="(val) => mainObject.Url = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Icon">
+                <EditImageUrl CurrentValue="@mainObject.Icon" OnValueSaved="(val) => mainObject.Icon = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Platform">
+                <EditSelectorValue_T TItem="AppPlatform" CurrentValue="@mainObject.Platform" OnValueSaved="(val) => mainObject.Platform = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Status">
+                <EditSelectorValue_T TItem="AppStatus" CurrentValue="@mainObject.Status" OnValueSaved="(val) => mainObject.Status = val" />
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Images">
+                <MudStack>
+                    <Admin_ImageEditionBars Images="@mainObject.Images" OnImagesChanged="ReplaceImages" />
+                </MudStack>
+            </MudExpansionPanel>
+            <MudExpansionPanel Text="Preview">
+                <MudElement Class="pa-4">
+                    <MudSlider Class="pa-2" Min="0" Max="30" TickMarks="true" Immediate="true" Step="5" Size="Size.Large" @bind-Value="@carouselSize">Gallery size: @carouselSize</MudSlider>
+                    <AppPreviewContainer App="@mainObject" GallerySize="@carouselSize" />
+                </MudElement>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+        <MudStack Class="my-4 pa-4 mud-theme-surface mud-surface-text" Row="true" Justify="Justify.SpaceBetween">
+            <MudButton OnClick="@DeleteAppHandler" ButtonType="ButtonType.Button" Color="Color.Error" Variant="Variant.Filled">Delete</MudButton>
+            <MudButton OnClick="@RestoreFromBackupHandler" ButtonType="ButtonType.Button" Color="Color.Secondary" Variant="Variant.Filled">Restore</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Submit</MudButton>
+        </MudStack>
+    </EditForm>
+}

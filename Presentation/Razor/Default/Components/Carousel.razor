@@ -1,0 +1,11 @@
+﻿@inherits CarouselBase
+
+<MudContainer Style="@($"{carouselVisibility}")">
+    <MudCarousel AutoCycle="false" Style="@($"{carouselSize}")" ItemsSource="@App.Images" ShowBullets="false" ShowArrows="true">
+        <ItemTemplate>
+            <div class="d-flex flex-column flex-column justify-center h-100">
+                <MudImage Src="@context" Class="ma-1 h-100" ObjectPosition="ObjectPosition.Center" ObjectFit="ObjectFit.ScaleDown"></MudImage>
+            </div>
+        </ItemTemplate>
+    </MudCarousel>
+</MudContainer>

@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.5" />
+    <PackageReference Include="Blazored.LocalStorage" Version="4.3.0" />
+    <PackageReference Include="MudBlazor" Version="6.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.5" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.30.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Razor\Admin\Pages\Admin_EditApp.razor" />
+    <Content Remove="Razor\Admin\Pages\Admin_EditUser.razor" />
+    <Content Remove="Razor\Default\Layout\MainLayout.razor" />
+    <Content Remove="Razor\Default\Layout\NavMenu.razor" />
+    <Content Remove="Razor\Default\Layout\UserMenu.razor" />
+    <Content Remove="Razor\Default\Pages\AddApp.razor" />
+    <Content Remove="Razor\Default\Pages\Index.razor" />
+    <Content Remove="Razor\Default\Pages\Login.razor" />
+    <Content Remove="Razor\Default\Pages\Profile.razor" />
+    <Content Remove="Razor\Default\Pages\Register.razor" />
+    <Content Remove="Razor\Main.razor" />
+  </ItemGroup>
+  <ItemGroup>
+    <RazorComponent Include="Razor\Admin\Pages\Admin_EditApp.razor" />
+    <RazorComponent Include="Razor\Admin\Pages\Admin_EditUser.razor" />
+    <RazorComponent Include="Razor\Default\Layout\MainLayout.razor" />
+    <RazorComponent Include="Razor\Default\Layout\NavMenu.razor" />
+    <RazorComponent Include="Razor\Default\Layout\UserMenu.razor" />
+    <RazorComponent Include="Razor\Default\Pages\AddApp.razor" />
+    <RazorComponent Include="Razor\Default\Pages\Index.razor" />
+    <RazorComponent Include="Razor\Default\Pages\Login.razor" />
+    <RazorComponent Include="Razor\Default\Pages\Profile.razor" />
+    <RazorComponent Include="Razor\Default\Pages\Register.razor" />
+    <RazorComponent Include="Razor\Main.razor" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Razor\" />
+    <None Remove="Services\" />
+    <None Remove="Auth\" />
+    <None Remove="Middleware\" />
+    <None Remove="Utils\" />
+    <None Remove="ExtensionMethods\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Razor\" />
+    <Folder Include="Services\" />
+    <Folder Include="Auth\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="Utils\" />
+    <Folder Include="ExtensionMethods\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedDomain\SharedDomain.csproj" />
+  </ItemGroup>
+</Project>

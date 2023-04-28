@@ -1,0 +1,9 @@
+﻿@typeparam TItem
+@inherits SelectorBase_T<TItem>
+
+<MudSelect @bind-Value="BindingValue" @bind-Value:after="@(() => ChangeBindingValue(BindingValue))" Class="pa-2" FullWidth="true" Label="@Label" Variant="Variant.Outlined">
+    @foreach (TItem item in Enum.GetValues(typeof(TItem)))
+    {
+        <MudSelectItem Value="@item">@item</MudSelectItem>
+    }
+</MudSelect>

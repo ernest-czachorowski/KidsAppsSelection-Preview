@@ -1,0 +1,21 @@
+﻿@inherits AppPreviewContainerBase
+
+<MudPaper Class="pa-2 mud-theme-tertiary mud-tertiary-text">
+    <MudStack>
+        <MudStack Row="true">
+            <MudImage Src="@App.Icon" Width="@GLOBAL.IMAGE_SIZE_3" Height="@GLOBAL.IMAGE_SIZE_3" Alt="@GLOBAL.IMAGE_ALT_TEXT" ObjectFit="ObjectFit.Fill" />
+            <MudText Typo="Typo.h5">@App.Title</MudText>
+        </MudStack>
+        <Carousel App="@App" GallerySize="@GallerySize" />
+        <MudStack Row="true">
+            <MudText Align="Align.End"><b>Status:</b> @App.Status</MudText>
+            <MudText Align="Align.End"><b>Platform:</b> @App.Platform</MudText>
+        </MudStack>
+        <MudStack Row="true" Justify="Justify.SpaceBetween">
+            <MudText Align="Align.End"><b>Added by:</b> @App.AddedBy</MudText>
+            <MudSpacer/>
+            <MudButton Href="@($"/Admin/EditApp/{App.Id}")" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Secondary" Variant="Variant.Filled">Edit</MudButton>
+            <MudButton Href="@App.Url" StartIcon="@goToStoreIcon" Color="Color.Primary" Variant="Variant.Filled">Go to store</MudButton>
+        </MudStack>
+    </MudStack>
+</MudPaper>

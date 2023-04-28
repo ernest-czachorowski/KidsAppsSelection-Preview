@@ -1,0 +1,9 @@
+﻿@typeparam TItem
+@inherits ValueComparer_T<TItem>
+
+<Selector_T TItem="TItem" BindingValue=@CurrentValue BindingValueChanged="@OnValueSaved" />
+
+@if (!CurrentValue.Equals(BackupValue))
+{
+    <WarningIfValueChanged RestoreValueHandler="@(() => RestoreValueHandler())" />
+}

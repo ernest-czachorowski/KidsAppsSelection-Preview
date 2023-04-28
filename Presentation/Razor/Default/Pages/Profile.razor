@@ -1,0 +1,69 @@
+﻿@page "/Profile"
+@inherits ProfileBase
+
+@attribute [Authorize]
+
+<PageTitle>Profile</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+}
+else if (pageStatus == PageStatus.DataLoaded)
+{
+    <MudPaper Class="my-2 pa-2 mud-theme-tertiary mud-tertiary-text">
+        <MudText Align="Align.Center" Typo="Typo.h6">Your profile</MudText>
+    </MudPaper>
+
+    <MudList>
+        <MudListItem Icon="@Icons.Material.Filled.PermIdentity">
+            <MudText>Id: @mainObject.Id</MudText>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Person">
+            <MudText>Username: @mainObject.Username</MudText>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Email">
+            <MudText>Email: @mainObject.Email</MudText>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.PermIdentity">
+            <MudText>Role: @mainObject.Role</MudText>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.LockClock">
+            <MudText>Creation date: @mainObject.CreateDate_UTC</MudText>
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.DeleteForever">
+            <MudButton Href="/DeleteAccount" Color="Color.Error" Variant="Variant.Filled">Delete my account</MudButton>
+        </MudListItem>
+    </MudList>
+
+    if (mainObject.Apps.Any())
+    {
+        <MudPaper Class="my-2 pa-2 mud-theme-tertiary mud-tertiary-text">
+            <MudText Align="Align.Center" Typo="Typo.h6">Games added by you</MudText>
+        </MudPaper>
+
+        <MudTable Items="@mainObject.Apps" Hover="true" Breakpoint="Breakpoint.Sm" HorizontalScrollbar="false">
+            <HeaderContent>
+                <MudTh>Icon</MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<App_DTO, object>(x => x.Title)">Title</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<App_DTO, object>(x => x.Status)">Status</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<App_DTO, object>(x => x.Platform)">Platform</MudTableSortLabel></MudTh>
+                <MudTh>Go to store</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Icon">
+                    <MudImage Class="ma-2" ObjectFit="ObjectFit.Fill" Width="64" Height="64" Src="@context.Icon" />
+                </MudTd>
+                <MudTd DataLabel="Title">@context.Title</MudTd>
+                <MudTd DataLabel="Visibility">@context.Status</MudTd>
+                <MudTd DataLabel="Platform">@context.Platform</MudTd>
+                <MudTd DataLabel="Go to store">
+                    <MudButton Href="@(context.Url)" Color="Color.Primary" Variant="Variant.Filled">Go to store</MudButton>
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[] { 10, 100 }" />
+            </PagerContent>
+        </MudTable>
+    }
+}

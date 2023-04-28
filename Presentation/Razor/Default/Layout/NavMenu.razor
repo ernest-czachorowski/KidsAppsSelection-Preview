@@ -1,0 +1,14 @@
+﻿@using System.Security.Claims
+
+<MudNavMenu>
+    <MudNavLink Href="/Debug" Icon="@Icons.Material.Filled.BugReport" Match="NavLinkMatch.All" IconColor="Color.Warning">Debug</MudNavLink>
+    <MudNavLink Href="/" Icon="@Icons.Material.Filled.Dashboard" Match="NavLinkMatch.All">Dashboard</MudNavLink>
+    <MudNavLink Href="/ShowApps" Icon="@Icons.Material.Filled.VideogameAsset" Match="NavLinkMatch.Prefix">Show apps</MudNavLink>
+    <AuthorizeView>
+        <MudNavLink Href="/AddApp" Icon="@Icons.Material.Filled.AddLink" Match="NavLinkMatch.Prefix">Add app</MudNavLink>
+    </AuthorizeView>
+    <AuthorizeView Roles="@UserRole.Admin.ToString()">
+        <MudNavLink Href="/Admin/ManageApps" Icon="@Icons.Material.Filled.VideogameAsset" IconColor="Color.Error" Match="NavLinkMatch.Prefix">Manage apps</MudNavLink>
+        <MudNavLink Href="/Admin/ManageUsers" Icon="@Icons.Material.Filled.PersonSearch" IconColor="Color.Error" Match="NavLinkMatch.Prefix">Manage users</MudNavLink>
+    </AuthorizeView>
+</MudNavMenu>

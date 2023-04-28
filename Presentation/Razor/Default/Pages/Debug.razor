@@ -1,0 +1,33 @@
+﻿@page "/Debug"
+@inherits DebugBase
+
+<PageTitle>Debug</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+    return;
+}
+
+<MudStack Spacing="3">
+    <MudPaper Class="pa-2 mud-theme-tertiary mud-info-tertiary">
+        <MudText Align="Align.Center" Typo="Typo.h6">Debug token / logins</MudText>
+    </MudPaper>
+    <MudTextField T="string" @bind-Value="_currentToken" Label="Current token" HelperText="To apply the token, click the 'Set token' button below. Do not include the 'Bearer' keyword. If you enter an invalid token, the Authentication State Provider will reject it without providing any feedback." Variant="Variant.Outlined" Text="@_currentToken" Lines="5" Immediate="true" />
+    <MudButton OnClick="SetTokenHandler" FullWidth="true" Color="Color.Info" Variant="Variant.Filled">Set token</MudButton>
+    <MudButton OnClick="RemoveTokenHandler" FullWidth="true" Color="Color.Info" Variant="Variant.Filled">Remove token</MudButton>
+    <MudButton OnClick="LogoutDontNavigate" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Logout</MudButton>
+    <MudButton OnClick="LogoutButKeepTokenHandler" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Logout but keep token</MudButton>
+    @for(int i = 1; i < 4; i++)
+    {
+        int localIndex = i;
+        string login = $"admin-{localIndex}@google.com";
+        <MudButton OnClick="() => LoginAsHandler(login)" FullWidth="true" Color="Color.Error" Variant="Variant.Filled">Login as @login</MudButton>
+    }
+    @for (int i = 1; i < 9; i++)
+    {
+        int localIndex = i;
+        string login = $"user-{localIndex}@google.com";
+        <MudButton OnClick="() => LoginAsHandler(login)" FullWidth="true" Color="Color.Warning" Variant="Variant.Filled">Login as @login</MudButton>
+    }
+</MudStack>

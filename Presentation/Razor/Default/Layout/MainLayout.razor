@@ -1,0 +1,43 @@
+﻿@inherits MainLayoutBase
+
+<MudThemeProvider Theme="customTheme" IsDarkMode="isDrkMode" />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar>
+        <MudIconButton OnClick="@((e) => NavToggle())" Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
+        <AuthorizeView>
+            <Authorized>
+                <MudPaper Class="px-2 ma-1">
+                    <MudText>Welcome @context.User.Identity.Name</MudText>
+                </MudPaper>
+                @if(context.User.IsInRole(UserRole.Admin.ToString()))
+                {
+                    <MudPaper Class="px-2 ma-1 mud-theme-error mud-error-text">
+                        <MudText>ADMIN</MudText>
+                    </MudPaper>
+                }
+            </Authorized>
+            <NotAuthorized>
+                <MudPaper Class="pl-2 pr-2 ma-1 mud-theme-sufrace mud-surface-text">
+                    <MudText>Welcome to Kids Apps Selection</MudText>
+                </MudPaper>
+            </NotAuthorized>
+        </AuthorizeView>
+        <MudSpacer />
+        <MudSwitch @bind-Checked="isDrkMode" Color="Color.Primary" Class="ma-4" T="bool" Label="" />
+        <MudIconButton OnClick="@((e) => UserToggle())" Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" Edge="Edge.Start" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@navBarOpen" Anchor="Anchor.Start" Variant="DrawerVariant.Temporary">
+        <NavMenu />
+    </MudDrawer>
+    <MudDrawer @bind-Open="@userBarOpen" Anchor="Anchor.End" Variant="DrawerVariant.Temporary">
+        <UserMenu />
+    </MudDrawer>
+    <MudMainContent>
+        <MudContainer Class="pa-4" Fixed="true">
+            @Body
+        </MudContainer>
+    </MudMainContent>
+</MudLayout>

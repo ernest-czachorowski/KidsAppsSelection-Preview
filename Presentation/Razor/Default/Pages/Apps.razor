@@ -1,0 +1,28 @@
+﻿@page "/ShowApps"
+@inherits AppsBase
+
+<PageTitle>Show Apps</PageTitle>
+
+<MudAlert Class="my-2" Severity="Severity.Warning" Variant="Variant.Filled">The application is not yet complete, and the presented data is only for testing purposes.</MudAlert>
+
+<MudExpansionPanels>
+    <MudExpansionPanel Text="Advanced">
+        <Selector_T TItem="AppPlatform" Label="Platform" BindingValueChanged="OnAppPlatformChangedHandler" BindingValue=@appPlatform />
+        <MudSlider Class="pa-2" Min="0" Max="30" TickMarks="true" Immediate="true" Step="5" Size="Size.Large" @bind-Value="@carouselSize">Gallery size: @carouselSize</MudSlider>
+    </MudExpansionPanel>
+</MudExpansionPanels>
+<SearchBar BindingValue="@searchedText" BindingValueChanged="SearchTextHandler" />
+
+@if (mainObject != null)
+{
+    <MudGrid Class="pa-4" Justify="Justify.SpaceBetween" Spacing="2">
+        @foreach (var app in mainObject)
+        {
+            <MudItem xs="12" md="6">
+                <AppPreviewContainer App="@app" GallerySize="@carouselSize" />
+            </MudItem>
+        }
+    </MudGrid>
+}
+
+<LoadMoreData PageStatus="@pageStatus" LoadMoreItems="LoadMoreItems" />

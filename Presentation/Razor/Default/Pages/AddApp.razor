@@ -1,0 +1,29 @@
+﻿@page "/AddApp"
+@inherits AddAppBase
+@attribute [Authorize]
+
+<PageTitle>Add App</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+}
+
+<EditForm EditContext="@editContext" OnValidSubmit="AddAppHandler">
+    <DataAnnotationsValidator />
+    <MudCard Class="my-2 pa-2 mud-theme-surface mud-surface-text">
+        <MudCardHeader Class="pa-2 mud-theme-tertiary mud-tertiary-text">
+            <MudText Align="Align.Center" Typo="Typo.h6">Add new app</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudText Align="Align.Justify" Typo="Typo.body1">
+                Add your favorite children's games to the list! Simply paste the <b>Google Play Store</b> app URL in the 'Url' field below to add it to the collection. Keep im mind your app will be visible after admin review it. Let's create a fun and engaging library of games for our little ones!
+            </MudText>
+            <MudTextField @bind-Value="mainObject.Url" For="@(() => mainObject.Url)" FullWidth="true" Label="Google Play Store Url https://..." InputType="InputType.Url" Variant="Variant.Outlined" />
+        </MudCardContent>
+        <MudCardActions>
+            <MudSpacer />
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Add App</MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>

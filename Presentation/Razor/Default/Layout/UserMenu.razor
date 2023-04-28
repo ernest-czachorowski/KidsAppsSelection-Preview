@@ -1,0 +1,13 @@
+﻿<MudNavMenu>
+    <AuthorizeView>
+        <Authorized>
+            <MudNavLink Href="/Profile" Icon="@Icons.Material.Filled.Person" Match="NavLinkMatch.Prefix">Profile</MudNavLink>
+            <MudNavLink Href="/ChangePassword" Icon="@Icons.Material.Filled.Password" Match="NavLinkMatch.Prefix">Change Password</MudNavLink>
+            <MudNavLink Href="/Logout" Icon="@Icons.Material.Filled.Logout" Match="NavLinkMatch.All">Logout</MudNavLink>
+        </Authorized>
+        <NotAuthorized>
+            <MudNavLink Href="/Register" Icon="@Icons.Material.Filled.PersonAdd" Match="NavLinkMatch.Prefix">Register</MudNavLink>
+            <MudNavLink Href="/Login" Icon="@Icons.Material.Filled.Login" Match="NavLinkMatch.Prefix">Login</MudNavLink>
+        </NotAuthorized>
+    </AuthorizeView>
+</MudNavMenu>

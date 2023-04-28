@@ -1,0 +1,29 @@
+﻿@for (int index = 0; index < Images.Length; index++)
+{
+    // If you don't know Blazor and you found this code, this "localIndex" variable may look strange for you
+    // But it need to stay here because of how Blazor is rendering components (Managing State). You can't use "index" here...
+    int localIndex = index;
+
+    <MudPaper Class="pa-2 mud-theme-tertiary mud-tertiary-text">
+        <MudStack Row="true" Justify="Justify.SpaceBetween">
+            <MudImage Src="@Images[localIndex]" Width="@GLOBAL.IMAGE_SIZE_4" Height="@GLOBAL.IMAGE_SIZE_4" Alt="@GLOBAL.IMAGE_ALT_TEXT" />
+            <MudStack Class="w-100">
+                <MudStack Class="pa-1" Row="true" Justify="Justify.SpaceBetween">
+                    <MudText>Index: @localIndex</MudText>
+                    <MudSpacer/>
+                    <MudFab OnClick="() => ChangeIndexHandler(localIndex, localIndex - 1)" Size="Size.Small" Color="Color.Success" StartIcon="@Icons.Material.Filled.ArrowUpward" />
+                </MudStack>
+                <MudDivider Class="my-1" />
+                <MudStack Class="pa-1" Row="true" Justify="Justify.SpaceBetween">
+                    <MudButton OnClick="() => DeleteImageHandler(localIndex)" Color="Color.Error" Variant="Variant.Filled">Delete</MudButton>
+                    <MudSpacer />
+                    <MudFab OnClick="() => ChangeIndexHandler(localIndex, localIndex + 1)" Size="Size.Small" Color="Color.Error" StartIcon="@Icons.Material.Filled.ArrowDownward" />
+                </MudStack>
+            </MudStack>
+        </MudStack>
+        <MudTextField @bind-Value="@Images[localIndex]" FullWidth="true" Immediate="true" Variant="Variant.Outlined" />
+        <ValueComparer_T TItem="string" CurrentValue="@Images[localIndex]" BackupValue="@_backups[localIndex]" OnValueSaved="@((val) => Images[localIndex] = val)" />
+    </MudPaper>
+}
+
+<MudButton OnClick="() => AddImageHandler()" FullWidth="true" Color="Color.Success" Variant="Variant.Filled">Add new image</MudButton>

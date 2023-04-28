@@ -1,0 +1,27 @@
+﻿@page "/Login"
+@inherits LoginBase
+
+<PageTitle>Login</PageTitle>
+
+@if (pageStatus == PageStatus.Loading)
+{
+    <Loading />
+    return;
+}
+
+<EditForm EditContext="@editContext" OnValidSubmit="LoginHandler">
+    <DataAnnotationsValidator />
+    <MudCard Class="pa-2 mud-theme-surface mud-surface-text">
+        <MudCardHeader Class="pa-2 mud-theme-tertiary mud-tertiary-text">
+            <MudText Align="Align.Center" Typo="Typo.h6">Login</MudText>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudTextField @bind-Value="@mainObject.Email" For="@(() => mainObject.Email)" Label="Email" Variant="Variant.Text" Immediate="true"></MudTextField>
+            <Password BindingValue="@mainObject.Password" BindingValueChanged="@((val) => mainObject.Password = val)" For="@(() => mainObject.Password)" />
+        </MudCardContent>
+        <MudCardActions>
+            <MudSpacer />
+            <MudButton ButtonType="ButtonType.Submit" Color="Color.Primary" Variant="Variant.Filled">Login</MudButton>
+        </MudCardActions>
+    </MudCard>
+</EditForm>

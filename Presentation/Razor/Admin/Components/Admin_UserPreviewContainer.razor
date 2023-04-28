@@ -1,0 +1,29 @@
+﻿<MudPaper Class="pa-2 mud-theme-tertiary mud-tertiary-text">
+    <MudStack Spacing="1">
+        <MudStack Row="true">
+            <MudIcon Icon="@Icons.Material.Filled.Attribution" />
+            <MudText>Username: @SelectedUser.Username</MudText>
+        </MudStack>
+        <MudStack Row="true">
+            <MudIcon Icon="@Icons.Material.Filled.Email" />
+            <MudText>Email: @SelectedUser.Email</MudText>
+        </MudStack>
+        <MudStack Row="true">
+            <MudIcon Icon="@Icons.Material.Filled.AssignmentInd" />
+            <MudText>Role: @SelectedUser.Role</MudText>
+        </MudStack>
+        <MudStack Row="true">
+            <MudIcon Icon="@Icons.Material.Filled.CreditCard" />
+            <MudText>Id: @SelectedUser.Id</MudText>
+        </MudStack>
+        <MudStack Row="true">
+            <MudIcon Icon="@Icons.Material.Filled.Update" />
+            <MudText>Last Updated: @SelectedUser.UpdateDate_UTC</MudText>
+        </MudStack>
+        <MudStack Row="true">
+            <MudIcon Icon="@Icons.Material.Filled.Apps" />
+            <MudText>Apps added: @SelectedUser.Apps.Count()</MudText>
+        </MudStack>
+        <MudButton Href="@($"/Admin/EditUser/{SelectedUser.Id}")" FullWidth="true" Color="Color.Primary" Variant="Variant.Filled">Edit</MudButton>
+    </MudStack>
+</MudPaper>
