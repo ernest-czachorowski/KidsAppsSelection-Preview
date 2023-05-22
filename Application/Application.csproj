@@ -54,9 +54,6 @@
     <Folder Include="AutoMapper\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Persistence\Database.csproj">
-      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
