@@ -1,0 +1,14 @@
+{
+    "admin_1_email" : "admin-1@google.com",
+    "admin_2_email" : "admin-2@google.com",
+    "admin_3_email" : "admin-3@google.com",
+
+    "default_password" : "Pa$$w0rd",
+
+    "delete_user_url" : "https://host.docker.internal:7154/API/Auth/Delete",
+    "login_url" : "https://host.docker.internal:7154/API/Auth/Login",
+    "logout_url": "https://host.docker.internal:7154/API/Auth/Logout",
+    "refresh_token_url" : "https://host.docker.internal:7154/API/Auth/RefreshToken",
+    "register_url" : "https://host.docker.internal:7154/API/Auth/Register",
+    "my_profile_url" : "https://host.docker.internal:7154/API/User/GetMyProfile"
+}
