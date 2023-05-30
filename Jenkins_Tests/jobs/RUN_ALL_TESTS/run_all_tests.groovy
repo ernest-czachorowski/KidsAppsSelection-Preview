@@ -15,7 +15,7 @@ pipeline {
                 }
             }
         }
-        stage('Test Basic Braffic') {
+        stage('Test Basic Traffic') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                     build job: "TEST_basic_traffic", wait: true

@@ -97,7 +97,10 @@ public class TokenBlockingService : ITokenBlockingService
         {
             using (await _rwlock.AcquireWriteLockAsync(TimeSpan.FromMilliseconds(_writerTimeout_ms)))
             {
-                _blockedTokensInfo[userId] = DateTime.UtcNow;
+                // If the old token will be blocked and the new token will be created in same second, then both new and old will be blocked
+                // To prevent this I am adding -2 seconds
+                _blockedTokensInfo[userId] = DateTime.UtcNow.AddSeconds(-2);
+                _logger.LogWarning($"User: {userId} tokens blocked!");
             }
         }
         catch (TimeoutException e)

@@ -9,7 +9,9 @@ COPY scripts /var/jenkins_home/scripts
 COPY config/pipelines_to_jobs.sh /var/jenkins_home/pipelines_to_jobs.sh
 
 USER root
-# RUN apt-get update && apt-get install -y vim
+RUN apt-get update && apt-get install -y vim dos2unix
+RUN dos2unix /var/jenkins_home/pipelines_to_jobs.sh
+RUN chmod +x /var/jenkins_home/pipelines_to_jobs.sh
 RUN /var/jenkins_home/pipelines_to_jobs.sh
 RUN chown -R jenkins:jenkins /var/jenkins_home/jobs
 RUN chown -R jenkins:jenkins /var/jenkins_home/scripts

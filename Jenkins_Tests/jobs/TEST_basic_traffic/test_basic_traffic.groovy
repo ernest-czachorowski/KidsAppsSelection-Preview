@@ -86,11 +86,17 @@ pipeline {
             }
         }
 
+        stage('Wait - 0') {
+            steps {
+                sleep(time: 3, unit: "SECONDS")
+            }
+        }
+
         stage('Test - Logout should pass') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                     script {
-                        def response = SEND.request('POST', "${LOGOUT_URL}/?request=true", AUTH_TOKEN, REFRESH_TOKEN);
+                        def response = SEND.request('POST', "${LOGOUT_URL}", AUTH_TOKEN, REFRESH_TOKEN);
 
                         assert response.statusCode == 200;
                         assert response.payload.data == true;
@@ -101,6 +107,12 @@ pipeline {
                         REFRESH_TOKEN = response.headers['Set-Cookie'][0].split(';').find { it.startsWith('refreshToken=') }.substring('refreshToken='.length())
                     }
                 }
+            }
+        }
+
+        stage('Wait - 1') {
+            steps {
+                sleep(time: 3, unit: "SECONDS")
             }
         }
 
@@ -157,6 +169,12 @@ pipeline {
                         assert response.payload.message == "The requested data has been successfully loaded.";
                     }
                 }
+            }
+        }
+
+        stage('Wait - 2') {
+            steps {
+                sleep(time: 3, unit: "SECONDS")
             }
         }
 
